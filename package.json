@@ -1,26 +1,73 @@
 {
-  "private": true,
-  "name": "template-for-proposals",
-  "description": "A repository template for ECMAScript proposals.",
-  "scripts": {
-    "start": "npm run build-loose -- --watch",
-    "build": "npm run build-loose -- --strict",
-    "build-loose": "node -e 'fs.mkdirSync(\"build\", { recursive: true })' && ecmarkup --load-biblio @tc39/ecma262-biblio --verbose spec.emu build/index.html --lint-spec"
-  },
-  "homepage": "https://github.com/tc39/template-for-proposals#readme",
+  "name": "@hotequil/proposal-filter-groups",
+  "description": "TC39 proposal to implement the Array.prototype.filterGroups.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "hotequil@protonmail.com",
+  "homepage": "https://github.com/hotequil/proposal-filter-groups#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tc39/template-for-proposals.git"
+    "url": "git+https://github.com/hotequil/proposal-filter-groups.git"
   },
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hotequil/proposal-filter-groups/issues"
+  },
+  "keywords": [
+    "JavaScript",
+    "TypeScript",
+    "ECMAScript",
+    "Array",
+    "filter-groups",
+    "filter",
+    "groups",
+    "proposal",
+    "polyfill"
+  ],
+  "source": "polyfill/index.ts",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "scripts": {
+    "postinstall": "husky",
+    "prettier": "prettier . -w",
+    "performance": "ts-node polyfill/performance.ts",
+    "test": "lint-staged && jest",
+    "build": "npm run prettier && rm -rf dist/ && tsc",
+    "pre-publish": "npm test && npm run build",
+    "emu:start": "npm run emu:build-loose -- --watch",
+    "emu:build": "npm run emu:build-loose -- --strict",
+    "emu:build-loose": "node -e 'fs.mkdirSync(\"build\", { recursive: true })' && ecmarkup --load-biblio @tc39/ecma262-biblio --verbose spec.emu build/index.html --lint-spec"
+  },
   "devDependencies": {
-    "@tc39/ecma262-biblio": "^2.1.2895",
-    "ecmarkup": "^21.3.0",
+    "@tc39/ecma262-biblio": "2.1.2921",
+    "@types/jest": "^30.0.0",
+    "ecmarkup": "^21.3.1",
+    "husky": "^9.1.7",
+    "jest": "^30.0.4",
     "jsdom": "^26.1.0",
+    "lint-staged": "^16.1.2",
     "parse5-html-rewriting-stream": "^7.1.0",
-    "tmp": "^0.2.3"
+    "prettier": "^3.6.2",
+    "tmp": "^0.2.3",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">= 18"
+  },
+  "prettier": {
+    "singleQuote": false,
+    "trailingComma": "none",
+    "arrowParens": "avoid",
+    "tabWidth": 2
+  },
+  "lint-staged": {
+    "*.{md,json,yml,ts}": "prettier --write"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testPathIgnorePatterns": [
+      "dist/.+"
+    ]
   }
 }

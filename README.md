@@ -1,50 +1,174 @@
-# template-for-proposals
+# Filter groups proposal
 
-A repository template for ECMAScript proposals.
+TC39 proposal to implement the `Array.prototype.filterGroups`.
 
-## Before creating a proposal
+[![npm](https://img.shields.io/npm/v/@hotequil/proposal-filter-groups.svg)][2]
+[![npm](https://img.shields.io/npm/dt/@hotequil/proposal-filter-groups.svg)][2]
+[![npm](https://img.shields.io/npm/l/@hotequil/proposal-filter-groups.svg)][2]
 
-Please ensure the following:
-  1. You have read the [process document](https://tc39.github.io/process-document/)
-  1. You have reviewed the [existing proposals](https://github.com/tc39/proposals/)
-  1. You are aware that your proposal requires being a member of TC39, or locating a TC39 delegate to “champion” your proposal
+![Proposal Stage 0](https://img.shields.io/badge/Proposal-Stage--0-blue)
+[![Status](https://github.com/hotequil/proposal-filter-groups/actions/workflows/publish-npm.yml/badge.svg)][1]
 
-## Create your proposal repo
+[![NPM](https://nodei.co/npm/@hotequil/proposal-filter-groups.png?downloads=true&downloadRank=true&stars=true)][2]
 
-Follow these steps:
-  1. Click the green [“use this template”](https://github.com/tc39/template-for-proposals/generate) button in the repo header. (Note: Do not fork this repo in GitHub's web interface, as that will later prevent transfer into the TC39 organization)
-  1. Update ecmarkup and the biblio to the latest version: `npm install --save-dev ecmarkup@latest && npm install --save-dev --save-exact @tc39/ecma262-biblio@latest`.
-  1. Go to your repo settings page:
-      1. Under “General”, under “Features”, ensure “Issues” is checked, and disable “Wiki”, and “Projects” (unless you intend to use Projects)
-      1. Under “Pull Requests”, check “Always suggest updating pull request branches” and “automatically delete head branches”
-      1. Under the “Pages” section on the left sidebar, and set the source to “deploy from a branch”, select “gh-pages” in the branch dropdown, and then ensure that “Enforce HTTPS” is checked.
-      1. Under the “Actions” section on the left sidebar, under “General”, select “Read and write permissions” under “Workflow permissions” and click “Save”
-  1. [“How to write a good explainer”][explainer] explains how to make a good first impression.
+## Reason
 
-      > Each TC39 proposal should have a `README.md` file which explains the purpose
-      > of the proposal and its shape at a high level.
-      >
-      > ...
-      >
-      > The rest of this page can be used as a template ...
+JavaScript has a lot of [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) methods, but when you have to filter many items, you have to install external libraries, create helpers or write many filters to achieve the same result. I want to collaborate with the community and specification. It's a simple solution for my problems, and it can be your solution too.
 
-      Your explainer can point readers to the `index.html` generated from `spec.emu`
-      via markdown like
+## How it works
 
-      ```markdown
-      You can browse the [ecmarkup output](https://ACCOUNT.github.io/PROJECT/)
-      or browse the [source](https://github.com/ACCOUNT/PROJECT/blob/HEAD/spec.emu).
-      ```
+1. It receives one or more **functions (callbacks)** that return a **boolean**;
+2. It returns the filtered **arrays** inside a parent **array**.
 
-      where *ACCOUNT* and *PROJECT* are the first two path elements in your project's Github URL.
-      For example, for github.com/**tc39**/**template-for-proposals**, *ACCOUNT* is “tc39”
-      and *PROJECT* is “template-for-proposals”.
+## Installation
 
+Install the package using [npm](https://www.npmjs.com) or another package manager you want.
 
-## Maintain your proposal repo
+```shell
+npm install @hotequil/proposal-filter-groups
+```
 
-  1. Make your changes to `spec.emu` (ecmarkup uses HTML syntax, but is not HTML, so I strongly suggest not naming it “.html”)
-  1. Any commit that makes meaningful changes to the spec, should run `npm run build` to verify that the build will succeed and the output looks as expected.
-  1. Whenever you update `ecmarkup`, run `npm run build` to verify that the build will succeed and the output looks as expected.
+## Usage
 
-  [explainer]: https://github.com/tc39/how-we-work/blob/HEAD/explainer.md
+Import the polyfill in the main, index or app file of your project.
+
+```TypeScript
+import "@hotequil/proposal-filter-groups";
+```
+
+## Typical cases
+
+Follow the examples in TypeScript below.
+
+```TypeScript
+// imports omitted…
+
+export const vehicles: Vehicle[] = [
+  { name: "Toyota Corolla", type: "sedan" },
+  { name: "Honda Fit", type: "hatch" },
+  { name: "Honda Civic", type: "sedan" },
+  { name: "Honda CRV", type: "suv" },
+  { name: "Toyota Etios", type: "hatch" },
+  { name: "Honda Odyssey", type: "van" },
+  { name: "Toyota Dyna", type: "truck" },
+  { name: "Toyota SW4", type: "suv" }
+];
+
+const [sedanVehicles, hatchVehicles, suvVehicles, otherVehicles] =
+  vehicles.filterGroups(
+    // You can use the index and array parameters too
+    ({ type }, _index, _array) => type === "sedan",
+    vehicle => vehicle.type === "hatch",
+    vehicle => vehicle.type === "suv"
+  );
+// [
+//   [
+//     { name: "Toyota Corolla", type: "sedan" },
+//     { name: "Honda Civic", type: "sedan" }
+//   ],
+//   [
+//     { name: "Honda Fit", type: "hatch" },
+//     { name: "Toyota Etios", type: "hatch" }
+//   ],
+//   [
+//     { name: "Honda CRV", type: "suv" },
+//     { name: "Toyota SW4", type: "suv" }
+//   ],
+//   [
+//     { name: "Honda Odyssey", type: "van" },
+//     { name: "Toyota Dyna", type: "truck" }
+//   ]
+// ]
+
+// The first callbacks have preference
+const [vehiclesWithName, vehiclesWithType] =
+  vehicles.filterGroups(
+    ({ name }) => name.length > 0,
+    ({ type }) => type.length > 0
+  );
+// [
+//   [
+//     { name: "Toyota Corolla", type: "sedan" },
+//     { name: "Honda Fit", type: "hatch" },
+//     { name: "Honda Civic", type: "sedan" },
+//     { name: "Honda CRV", type: "suv" },
+//     { name: "Toyota Etios", type: "hatch" },
+//     { name: "Honda Odyssey", type: "van" },
+//     { name: "Toyota Dyna", type: "truck" },
+//     { name: "Toyota SW4", type: "suv" }
+//   ],
+//   []
+// ]
+
+// It'll throw a TypeError, it isn't allowed use numbers in callbacks
+vehicles.filterGroups(
+  () => true,
+  () => true,
+  1,
+  () => true
+)
+
+// It'll throw a TypeError, it isn't allowed use strings in callbacks
+vehicles.filterGroups(
+  () => true,
+  () => true,
+  "type",
+  () => true
+)
+
+// It'll throw a TypeError, it isn't allowed use booleans in callbacks
+vehicles.filterGroups(
+  () => true,
+  () => true,
+  true,
+  () => true
+)
+
+// It'll throw a TypeError, it isn't allowed use objects in callbacks
+vehicles.filterGroups(
+  () => true,
+  () => true,
+  {},
+  () => true
+)
+```
+
+## Performance
+
+Test the [performance.ts](polyfill/performance.ts) file.
+
+```TypeScript
+const numbers = Array.from(
+  { length: 1_000_000 },
+  (_, index) => index - 500_000
+);
+
+// 25.043ms
+const [_negatives, _evens, _odds] = numbers.filterGroups(
+  number => number < 0,
+  number => number % 2 === 0,
+  number => number % 2 !== 0
+);
+
+// 29.505ms
+const _negatives2 = numbers.filter(number => number < 0);
+const _evens2 = numbers.filter(number => number >= 0 && number % 2 === 0);
+const _odds2 = numbers.filter(number => number >= 0 && number % 2 !== 0);
+```
+
+## Similar methods
+
+There are some similar methods, but they are not exactly the same as this proposal:
+
+| Method name                                                                                             | Responsible                  |
+| ------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) | [TC39](https://tc39.es)      |
+| [groupBy](https://lodash.com/docs#groupBy)                                                              | [Lodash](https://lodash.com) |
+| [partition](https://lodash.com/docs#partition)                                                          | [Lodash](https://lodash.com) |
+
+## Proposer
+
+- Author: [@hotequil](https://github.com/hotequil)
+- Champion: _no one at the moment_
+
+_This repository there isn't other third dependency, see the [package.json](package.json)._

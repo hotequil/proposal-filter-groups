@@ -44,3 +44,7 @@ pnpm-lock.yaml
 
 # Build directory
 build
+dist
+
+# IDE
+.idea
