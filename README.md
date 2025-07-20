@@ -168,6 +168,6 @@ There are some similar methods, but they are not exactly the same as this propos
 ## Proposer
 
 - Author: [@hotequil](https://github.com/hotequil)
-- Champion: _no one at this moment_
+- Champion: _no one at the moment_
 
 _This repository there isn't other third dependency, see the [package.json](package.json)._
