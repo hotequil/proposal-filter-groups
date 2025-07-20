@@ -1,9 +1,9 @@
-name: Publish main
+name: Publish documentation
 
-#on:
-#  push:
-#    branches:
-#      - main
+on:
+  push:
+    branches:
+      - docs
 
 jobs:
   publish:

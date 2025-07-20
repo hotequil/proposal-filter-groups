@@ -1,10 +1,10 @@
 name: Publish PR
 run-name: ${{ github.event.workflow_run.display_title }}
 
-#on:
-#  workflow_run:
-#    workflows: ["Render PR"]
-#    types: [completed]
+on:
+  workflow_run:
+    workflows: ["Render PR"]
+    types: [completed]
 
 env:
   # Must match ./render-pr.yml
