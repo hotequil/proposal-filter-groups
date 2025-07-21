@@ -55,7 +55,7 @@ export const vehicles: Vehicle[] = [
 
 const [sedanVehicles, hatchVehicles, suvVehicles, otherVehicles] =
   vehicles.filterGroups(
-    // You can use the index and array parameters too
+    // You can use the index and array parameters too, it helps to mix many conditions
     ({ type }, _index, _array) => type === "sedan",
     vehicle => vehicle.type === "hatch",
     vehicle => vehicle.type === "suv"
