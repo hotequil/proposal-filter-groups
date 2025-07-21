@@ -18,10 +18,8 @@ jobs:
       - name: Install packages
         run: npm i
       - name: Pre-publish
-        if: ${{ !secrets.NPM_TOKEN }}
         run: npm run pre-publish
       - name: Publish
-        if: ${{ secrets.NPM_TOKEN }}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
