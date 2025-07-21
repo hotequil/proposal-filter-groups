@@ -1,16 +1,16 @@
-type Callbacks<T> = ((item: T, index: number, array: T[]) => boolean)[];
+type Callback<T> = ((item: T, index: number, array: T[]) => boolean)[];
 
 export {};
 
 declare global {
   interface Array<T> {
-    filterGroups(...callbacks: Callbacks<T>): T[][];
+    filterGroups(...callbacks: Callback<T>[]): T[][];
   }
 }
 
 if (!Array.prototype.filterGroups) {
   Object.defineProperty(Array.prototype, "filterGroups", {
-    value: function <T>(...callbacks: Callbacks<T>): T[][] {
+    value: function <T>(...callbacks: Callback<T>[]): T[][] {
       if (!callbacks.length)
         throw new TypeError("At least one callback must be provided");
 
