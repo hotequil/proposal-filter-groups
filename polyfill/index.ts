@@ -1,4 +1,4 @@
-type Callback<T> = ((item: T, index: number, array: T[]) => boolean)[];
+type Callback<T> = (item: T, index: number, array: T[]) => boolean;
 
 export {};
 
