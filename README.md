@@ -129,6 +129,25 @@ vehicles.filterGroups(
   {},
   () => true
 )
+
+export const users: User[] = [
+  { name: "Oliver", status: { name: "active" } },
+  { name: "Henry", status: { name: "inactive" } },
+  { name: "Thomas", status: { name: "active" } }
+];
+
+const [activeUsers, inactiveUsers] = users.filterGroups(
+  user => user.status.name === "active"
+);
+// [
+//   [
+//     { name: "Oliver", status: { name: "active" } },
+//     { name: "Thomas", status: { name: "active" } }
+//   ],
+//   [
+//     { name: "Henry", status: { name: "inactive" } }
+//   ]
+// ]
 ```
 
 ## Performance
