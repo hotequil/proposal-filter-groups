@@ -1,7 +1,7 @@
 {
   "name": "@hotequil/proposal-filter-groups",
   "description": "TC39 proposal to implement the Array.prototype.filterGroups.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "author": "hotequil@protonmail.com",
   "homepage": "https://github.com/hotequil/proposal-filter-groups#readme",
