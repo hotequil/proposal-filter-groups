@@ -2,13 +2,12 @@
 
 TC39 proposal to implement the `Array.prototype.filterGroups`.
 
-[![npm](https://img.shields.io/npm/v/@hotequil/proposal-filter-groups.svg)][2]
-[![npm](https://img.shields.io/npm/dt/@hotequil/proposal-filter-groups.svg)][2]
-[![npm](https://img.shields.io/npm/l/@hotequil/proposal-filter-groups.svg)][2]
-[![Status](https://github.com/hotequil/proposal-filter-groups/actions/workflows/publish-npm.yml/badge.svg)][1]
 ![Proposal Stage 0](https://img.shields.io/badge/Proposal-Stage--0-blue)
+![Version](https://img.shields.io/npm/v/@hotequil/proposal-filter-groups.svg)
+![Downloads](https://img.shields.io/npm/dt/@hotequil/proposal-filter-groups.svg)
+![License](https://img.shields.io/npm/l/@hotequil/proposal-filter-groups.svg)
 
-[![NPM](https://nodei.co/npm/@hotequil/proposal-filter-groups.png?downloads=true&downloadRank=true&stars=true)][2]
+![NPM](https://nodei.co/npm/@hotequil/proposal-filter-groups.png?downloads=true&downloadRank=true&stars=true)
 
 ## Reason
 
