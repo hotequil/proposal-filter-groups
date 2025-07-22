@@ -5,7 +5,7 @@ TC39 proposal to implement the `Array.prototype.filterGroups`.
 ![Proposal Stage 0](https://img.shields.io/badge/Proposal-Stage--0-blue)
 ![Version](https://img.shields.io/npm/v/@hotequil/proposal-filter-groups.svg)
 ![Downloads](https://img.shields.io/npm/dt/@hotequil/proposal-filter-groups.svg)
-![License](https://img.shields.io/npm/l/@hotequil/proposal-filter-groups.svg)
+![License](https://img.shields.io/npm/l/@hotequil/proposal-filter-groups)
 
 ![NPM](https://nodei.co/npm/@hotequil/proposal-filter-groups.png?downloads=true&downloadRank=true&stars=true)
 
