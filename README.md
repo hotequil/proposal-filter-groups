@@ -39,7 +39,7 @@ import "@hotequil/proposal-filter-groups";
 Follow the examples in TypeScript below.
 
 ```TypeScript
-// imports omitted…
+// Imports omitted…
 
 export const vehicles: Vehicle[] = [
   { name: "Toyota Corolla", type: "sedan" },
@@ -175,7 +175,7 @@ const _odds2 = numbers.filter(number => number >= 0 && number % 2 !== 0);
 
 ## Similar methods
 
-There are some similar methods, but they are not exactly the same as this proposal:
+There are some similar methods, but they are not exactly the same as this proposal.
 
 | Method name                                                                                             | Responsible                  |
 | ------------------------------------------------------------------------------------------------------- | ---------------------------- |
@@ -185,7 +185,7 @@ There are some similar methods, but they are not exactly the same as this propos
 
 ## Proposer
 
-- Author: [@hotequil](https://github.com/hotequil)
-- Champion: _no one at the moment_
+- Author: [@hotequil](https://github.com/hotequil);
+- Champion: _no one at the moment_.
 
 _This repository there isn't other third dependency, see the [package.json](package.json)._
