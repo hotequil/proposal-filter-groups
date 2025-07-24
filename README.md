@@ -1,6 +1,6 @@
 # Filter groups proposal
 
-TC39 proposal to implement the `Array.prototype.filterGroups`.
+[TC39 proposal](https://es.discourse.group/t/implement-the-array-prototype-filtergroups/2407) to implement the `Array.prototype.filterGroups`.
 
 ![Proposal Stage 0](https://img.shields.io/badge/Proposal-Stage--0-blue)
 ![Version](https://img.shields.io/npm/v/@hotequil/proposal-filter-groups.svg)
@@ -20,7 +20,7 @@ JavaScript has a lot of [Array](https://developer.mozilla.org/en-US/docs/Web/Jav
 
 ## Installation
 
-Install the package using [npm](https://www.npmjs.com) or another package manager you want.
+Install the package using [npm](https://www.npmjs.com) or another package manager you want. You can see the [package in npm](https://www.npmjs.com/package/@hotequil/proposal-filter-groups).
 
 ```shell
 npm install @hotequil/proposal-filter-groups
